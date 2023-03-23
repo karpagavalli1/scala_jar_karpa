@@ -6,6 +6,9 @@ import org.apache.spark.sql.{SaveMode, SparkSession}
 object dryrunkarpaCrypto {
 
   def main(args: Array[String]): Unit = {
+    val conf = new SparkConf().setAppName("someName").setAppName("WordCount").setMaster("local")
+    //create spark context object
+    val sc = new SparkContext(conf)
 
     val url = "jdbc:postgresql://ec2-13-40-49-105.eu-west-2.compute.amazonaws.com:5432/testdb"
     val properties = new java.util.Properties()
