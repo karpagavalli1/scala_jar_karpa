@@ -44,5 +44,12 @@ object dryrunkarpaCrypto {
     sorted_df_ethereum.show(false)
     // Create Hive Internal table
     sorted_df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_SortedByKeyByPrice1")
+    //*******************************************************************************************************
+    // Bitcoin table Transformations
+    println("Bitcoin Initial DataFrame")
+    val df_bitcoin = spark.read.jdbc(url, "bitcoin1", properties)
+    df_bitcoin.show(false)
+    // Create Hive Internal table
+    df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_InitialDataFrame1")
   }
 }
