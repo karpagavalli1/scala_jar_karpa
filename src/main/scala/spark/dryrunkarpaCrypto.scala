@@ -59,6 +59,23 @@ object dryrunkarpaCrypto {
     filtered_df_bitcoin.show(false)
     // Create Hive Internal table
     filtered_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_FilteredByPrice1")
+    // *****************************************************************************************************
 
+    println("Bitcoin DataFrame sortByKey() descending order by bitcoin_price")
+    // sortByKey() Transformation
+    val sorted_df_bitcoin = filtered_df_bitcoin.orderBy(desc("bitcoin_price"))
+    sorted_df_bitcoin.show(false)
+    // Create Hive Internal table
+    sorted_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_SortedByKeyByPrice1")
+
+    // *****************************************************************************************************
+
+    println("Drop the bitcoin_NULL column and Add a new column bitcoin_mean_price")
+    val dropped_bitcoin_null_column = df_bitcoin.drop("bitcoin_NULL")
+    // Compute the bitcoin_mean_price of the "bitcoin_price" column
+    val bitcoin_mean_price = df_bitcoin.select(mean(col("bitcoin_price"))).first().getDouble(0)
+    val mean_price_df_bitcoin = dropped_bitcoin_null_column.withColumn("bitcoin_mean_price", lit(bitcoin_mean_price))
+    mean_price_df_bitcoin.show(false)
+    mean_price_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_Mean_Price1")
   }
 }
