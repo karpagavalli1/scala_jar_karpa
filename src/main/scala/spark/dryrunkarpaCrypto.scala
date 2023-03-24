@@ -33,56 +33,6 @@ object dryrunkarpaCrypto {
 
     // *****************************************************************************************************
 
-    println("Ethereum DataFrame filtered by 'price > 1.3'")
-    // filter() Transformation = filter the records in an RDD. filtering price > "1.3".
-    val filtered_df_ethereum = df_ethereum.filter($"ethereum_price" > "1.3")
-    filtered_df_ethereum.show(false)
-    // Create Hive Internal table
-    filtered_df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_FilteredByPrice")
-
-    // *****************************************************************************************************
-
-    println("Ethereum DataFrame sortByKey() descending order by price")
-    // sortByKey() Transformation
-    val sorted_df_ethereum = filtered_df_ethereum.orderBy(desc("ethereum_price"))
-    sorted_df_ethereum.show(false)
-    // Create Hive Internal table
-    sorted_df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_SortedByKeyByPrice")
-    //*****************************************************************************************************
-    // Bitcoin table Transformations
-    println("Bitcoin Initial DataFrame")
-    val df_bitcoin = spark.read.jdbc(url, "bitcoin1", properties)
-    df_bitcoin.show(false)
-    // Create Hive Internal table
-    df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_InitialDataFrame")
-
-    // *****************************************************************************************************
-
-    println("Bitcoin DataFrame filtered by 'bitcoin_price < 250'")
-    // filter() Transformation = filter the records in an RDD. filtering 'price < 250'.
-    val filtered_df_bitcoin = df_bitcoin.filter($"bitcoin_price" < "250")
-    filtered_df_bitcoin.show(false)
-    // Create Hive Internal table
-    filtered_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_FilteredByPrice")
-
-    // *****************************************************************************************************
-
-    println("Bitcoin DataFrame sortByKey() descending order by bitcoin_price")
-    // sortByKey() Transformation
-    val sorted_df_bitcoin = filtered_df_bitcoin.orderBy(desc("bitcoin_price"))
-    sorted_df_bitcoin.show(false)
-    // Create Hive Internal table
-    sorted_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_SortedByKeyByPrice")
-
-    // *****************************************************************************************************
-
-    println("Drop the bitcoin_NULL column and Add a new column bitcoin_mean_price")
-    val dropped_bitcoin_null_column = df_bitcoin.drop("bitcoin_NULL")
-    // Compute the bitcoin_mean_price of the "bitcoin_price" column
-    val bitcoin_mean_price = df_bitcoin.select(mean(col("bitcoin_price"))).first().getDouble(0)
-    val mean_price_df_bitcoin = dropped_bitcoin_null_column.withColumn("bitcoin_mean_price", lit(bitcoin_mean_price))
-    mean_price_df_bitcoin.show(false)
-    mean_price_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_Mean_Price")
 
   }
 }
