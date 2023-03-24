@@ -37,5 +37,12 @@ object dryrunkarpaCrypto {
     val filtered_df_ethereum = df_ethereum.filter($"ethereum_price" > "1.3")
     filtered_df_ethereum.show(false)
     df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_Filteredbyprice1")
+    //*****************************************************************************************************
+    println("Ethereum DataFrame sortByKey() descending order by price")
+    // sortByKey() Transformation
+    val sorted_df_ethereum = filtered_df_ethereum.orderBy(desc("ethereum_price"))
+    sorted_df_ethereum.show(false)
+    // Create Hive Internal table
+    sorted_df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("mytestdb.Ethereum_SortedByKeyByPrice1")
   }
 }
