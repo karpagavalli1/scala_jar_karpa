@@ -51,5 +51,14 @@ object dryrunkarpaCrypto {
     df_bitcoin.show(false)
     // Create Hive Internal table
     df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_InitialDataFrame1")
+    // *****************************************************************************************************
+
+    println("Bitcoin DataFrame filtered by 'bitcoin_price < 250'")
+    // filter() Transformation = filter the records in an RDD. filtering 'price < 250'.
+    val filtered_df_bitcoin = df_bitcoin.filter($"bitcoin_price" < "250")
+    filtered_df_bitcoin.show(false)
+    // Create Hive Internal table
+    filtered_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Bitcoin_FilteredByPrice1")
+
   }
 }
