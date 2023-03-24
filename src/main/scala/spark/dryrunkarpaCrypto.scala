@@ -43,6 +43,6 @@ object dryrunkarpaCrypto {
     val sorted_df_ethereum = filtered_df_ethereum.orderBy(desc("ethereum_price"))
     sorted_df_ethereum.show(false)
     // Create Hive Internal table
-    sorted_df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("mytestdb.Ethereum_SortedByKeyByPrice1")
+    sorted_df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_SortedByKeyByPrice1")
   }
 }
