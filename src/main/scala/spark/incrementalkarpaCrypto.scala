@@ -30,6 +30,14 @@ object incrementalkarpaCrypto {
     val df_ethereum = sparkConnection.read.jdbc(url, query1, properties)
     df_ethereum.show(false)
     df_ethereum.write.mode(SaveMode.Append).saveAsTable("scalagroup.Ethereum_initialdataframe1")
+    //******************************************************************************************************
+    val max_filtered_df_ethereum = spark.sql("select max(ethereum_id) from mytestdb.ethereum_filteredbyprice").first()
+    val cdc_filtered_df_ethereum = max_filtered_df_ethereum.get(0)
+    val query_filtered_df_ethereum = s"(select * from ethereum1 where cast(ethereum_id as int) > $cdc_filtered_df_ethereum) as tb2_ethereum"
+
+    val filtered_df_ethereum = spark.read.jdbc(url, query_filtered_df_ethereum, properties)
+    filtered_df_ethereum.show(false)
+    filtered_df_ethereum.write.mode(SaveMode.Append).saveAsTable("mytestdb.ethereum_filteredByPrice")
 
   }
 }
