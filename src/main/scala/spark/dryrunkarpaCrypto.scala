@@ -29,7 +29,7 @@ object dryrunkarpaCrypto {
     val df_ethereum = spark.read.jdbc(url, "ethereum1", properties)
     df_ethereum.show(false)
     // Create Hive Internal table
-    df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_InitialDataFrame")
+    df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_InitialDataFrame1")
 
     // *****************************************************************************************************
 
