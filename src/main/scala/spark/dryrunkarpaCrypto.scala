@@ -32,7 +32,10 @@ object dryrunkarpaCrypto {
     df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_InitialDataFrame1")
 
     // *****************************************************************************************************
-
-
+    println("Ethereum DataFrame filtered by price > '1.3'")
+    // filter() Transformation = filter the records in an RDD. filtering price > "1.3".
+    val filtered_df_ethereum = df_ethereum.filter($"ethereum_price" > "1.3")
+    filtered_df_ethereum.show(false)
+    df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_Filteredbyprice1")
   }
 }
