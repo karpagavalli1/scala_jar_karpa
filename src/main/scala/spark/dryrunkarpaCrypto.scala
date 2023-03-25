@@ -82,7 +82,7 @@ object dryrunkarpaCrypto {
     // Create Hive Internal table
     sorted_df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.bitcoin_sortedbykeybyprice1")
 
-    // *****************************************************************************************************
+    // ****************************************************************************************************
     println("Drop the bitcoin_NULL column and Add a new column bitcoin_mean_price")
     val dropped_bitcoin_null_column = df_bitcoin.drop("bitcoin_NULL")
     // Compute the bitcoin_mean_price of the "bitcoin_price" column
