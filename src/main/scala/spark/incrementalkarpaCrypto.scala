@@ -103,7 +103,7 @@ object incrementalkarpaCrypto {
     // Compute the bitcoin_mean_price of the "bitcoin_price" column
 
     val bitcoin_mean_price = mean_price_df_bitcoin.select(mean(col("bitcoin_price"))).first().getDouble(0)
-    val mean_price_df_bitcoin_no_null = drop_mean_price_df_bitcoin_null_column.withColumn("bitcoin_mean_price", lit(bitcoin_mean_price))
+    val mean_price_df_bitcoin_no_null = drop_mean_price_df_bitcoin_null_column.withColumn("bitcoin_mean_price1", lit(bitcoin_mean_price))
     mean_price_df_bitcoin_no_null.show(false)
     mean_price_df_bitcoin_no_null.write.mode(SaveMode.Append).saveAsTable("scalagroup.bitcoin_mean_price1")
 
