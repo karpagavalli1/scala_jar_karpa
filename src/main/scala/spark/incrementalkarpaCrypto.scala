@@ -23,23 +23,23 @@ object incrementalkarpaCrypto {
     // Ethereum Incremental
     // *****************************************************************************************************
 
-    val max_df_ethereum = spark.sql("select max(ethereum_id) from scalagroup.ethereum_initialdataframe1").first()
+    val max_df_ethereum = spark.sql("select max(ethereum_id) from scalagroup.Ethereum_InitialDataFrame1").first()
     val cdc_df_ethereum = max_df_ethereum.get(0)
     val query_df_ethereum = s"(select * from ethereum1 where cast(ethereum_id as int) > $cdc_df_ethereum) as tb1_ethereum"
 
     val df_ethereum = spark.read.jdbc(url, query_df_ethereum, properties)
     df_ethereum.show(false)
-    df_ethereum.write.mode(SaveMode.Append).saveAsTable("scalagroup.ethereum_initialdataframe1")
+    df_ethereum.write.mode(SaveMode.Append).saveAsTable("scalagroup.Ethereum_InitialDataFrame1")
 
     // *****************************************************************************************************
 
-    val max_filtered_df_ethereum = spark.sql("select max(ethereum_id) from scalagroup.ethereum_filteredbyprice1").first()
+    val max_filtered_df_ethereum = spark.sql("select max(ethereum_id) from scalagroup.Ethereum_FilteredByPrice1").first()
     val cdc_filtered_df_ethereum = max_filtered_df_ethereum.get(0)
     val query_filtered_df_ethereum = s"(select * from ethereum1 where cast(ethereum_id as int) > $cdc_filtered_df_ethereum) as tb2_ethereum"
 
     val filtered_df_ethereum = spark.read.jdbc(url, query_filtered_df_ethereum, properties)
     filtered_df_ethereum.show(false)
-    filtered_df_ethereum.write.mode(SaveMode.Append).saveAsTable("scalagroup.ethereum_filteredbyprice1")
+    filtered_df_ethereum.write.mode(SaveMode.Append).saveAsTable("scalagroup.Ethereum_FilteredByPrice1")
 
     // *****************************************************************************************************
     val max_sorted_df_ethereum = spark.sql("select max(ethereum_id) from scalagroup.ethereum_sortedbykeybyprice1").first()
