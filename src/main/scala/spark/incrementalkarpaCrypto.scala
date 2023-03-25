@@ -62,9 +62,9 @@ object incrementalkarpaCrypto {
     mean_price_df_ethereum_no_null.show(false)
     mean_price_df_ethereum_no_null.write.mode(SaveMode.Append).saveAsTable("scalagroup.ethereum_mean_price1")
 
-    // *****************************************************************************************************
+    // ****************************************************************************************************
     // Bitcoin Incremental
-    // *****************************************************************************************************
+    // ****************************************************************************************************
 
     val max_df_bitcoin = spark.sql("select max(bitcoin_id) from scalagroup.bitcoin_initialdataframe1").first()
     val cdc_df_bitcoin = max_df_bitcoin.get(0)
