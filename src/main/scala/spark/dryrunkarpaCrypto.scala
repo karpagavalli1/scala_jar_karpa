@@ -23,7 +23,7 @@ object dryrunkarpaCrypto {
     import spark.implicits._
     import org.apache.spark.sql.functions._
 
-    // *****************************************************************************************************
+    // ****************************************************************************************************
     // Ethereum table Transformations
     println("Ethereum Initial DataFrame")
     val df_ethereum = spark.read.jdbc(url, "ethereum", properties)
