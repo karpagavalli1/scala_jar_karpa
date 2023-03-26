@@ -35,7 +35,7 @@ object Officestransformation {
 
     df2Map.printSchema()
     df2Map.show(false)
-    df1.write.mode(SaveMode.Overwrite).saveAsTable("mytestdb.officesJenkins_trans")
+    df2Map.write.mode(SaveMode.Overwrite).saveAsTable("mytestdb.officesJenkins_trans")
 
   }
 }
