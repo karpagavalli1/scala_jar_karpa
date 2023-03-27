@@ -18,10 +18,10 @@ object incrementalkarpaCrypto {
     properties.put("driver", "org.postgresql.Driver")
 
     val sparkConnection = SparkSession.builder().appName("JDBCExample").getOrCreate()
-    // *****************************************************************************************************
+    // ****************************************************************************************************
 
     // Ethereum Incremental
-    // *****************************************************************************************************
+    // ****************************************************************************************************
 
     val max_df_ethereum = spark.sql("select max(ethereum_id) from scalagroup.Ethereum_InitialDataFrame1").first()
     val cdc_df_ethereum = max_df_ethereum.get(0)
