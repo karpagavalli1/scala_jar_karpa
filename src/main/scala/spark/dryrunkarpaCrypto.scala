@@ -26,7 +26,7 @@ object dryrunkarpaCrypto {
     // ****************************************************************************************************
     // Ethereum table Transformations
     println("Ethereum Initial DataFrame")
-    val df_ethereum = spark.read.jdbc(url, "ethereum", properties)
+    val df_ethereum = spark.read.jdbc(url, "ethereum1", properties)
     df_ethereum.show(false)
     // Create Hive Internal table
     df_ethereum.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.Ethereum_InitialDataFrame1")
@@ -61,7 +61,7 @@ object dryrunkarpaCrypto {
     // *****************************************************************************************************
     // Bitcoin table Transformations
     println("Bitcoin Initial DataFrame")
-    val df_bitcoin = spark.read.jdbc(url, "bitcoin", properties)
+    val df_bitcoin = spark.read.jdbc(url, "bitcoin1", properties)
     df_bitcoin.show(false)
     // Create Hive Internal table
     df_bitcoin.write.mode(SaveMode.Overwrite).saveAsTable("scalagroup.bitcoin_initialdataframe1")
